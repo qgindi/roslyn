@@ -300,6 +300,9 @@ internal static partial class DependentProjectsFinder
             set.Add(assemblyName);
         }
 
+        //au:
+        RoslynMod.TestInternal.AppendInternalsVisible(assembly.Name, set);
+
         return set;
     }
 

@@ -396,12 +396,15 @@ public sealed class CompletionItem : IComparable<CompletionItem>
             inlineDescription: newInlineDescription,
             isComplexTextEdit: newIsComplexTextEdit)
         {
+            Symbols = Symbols, //au
             AutomationText = AutomationText,
             ProviderName = ProviderName,
             Flags = Flags,
             AdditionalFilterTexts = newAdditionalFilterTexts
         };
     }
+    internal IReadOnlyList<ISymbol>? Symbols { get; set; } //au
+    internal object? Attach { get; set; } //au
 
     /// <summary>
     /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="Span"/> property changed.

@@ -167,7 +167,8 @@ namespace Microsoft.CodeAnalysis
 
             _lazyInternalsVisibleToMap.TryGetValue(simpleName, out result);
 
-            return result ?? SpecializedCollections.EmptyEnumerable<ImmutableArray<byte>>();
+            //au
+            return result ?? RoslynMod.TestInternal.IsInternalsVisible(this.Identity.Name, simpleName);
         }
 
         internal IEnumerable<string> GetInternalsVisibleToAssemblyNames()

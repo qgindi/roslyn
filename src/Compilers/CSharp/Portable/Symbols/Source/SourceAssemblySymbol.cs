@@ -2116,23 +2116,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
+        //au
         internal override IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(string simpleName)
         {
-            //EDMAURER assume that if EnsureAttributesAreBound() returns, then the internals visible to map has been populated.
-            //Do not optimize by checking if m_lazyInternalsVisibleToMap is Nothing. It may be non-null yet still
-            //incomplete because another thread is in the process of building it.
-
             EnsureAttributesAreBound();
 
-            if (_lazyInternalsVisibleToMap == null)
-                return SpecializedCollections.EmptyEnumerable<ImmutableArray<byte>>();
+            if (_lazyInternalsVisibleToMap != null && _lazyInternalsVisibleToMap.TryGetValue(simpleName, out var result))
+                return result.Keys;
 
-            ConcurrentDictionary<ImmutableArray<byte>, Tuple<Location, string>> result = null;
-
-            _lazyInternalsVisibleToMap.TryGetValue(simpleName, out result);
-
-            return (result != null) ? result.Keys : SpecializedCollections.EmptyEnumerable<ImmutableArray<byte>>();
+            return RoslynMod.TestInternal.IsInternalsVisible(this.Name, simpleName);
         }
+        //internal override IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(string simpleName)
+        //{
+        //    //EDMAURER assume that if EnsureAttributesAreBound() returns, then the internals visible to map has been populated.
+        //    //Do not optimize by checking if m_lazyInternalsVisibleToMap is Nothing. It may be non-null yet still
+        //    //incomplete because another thread is in the process of building it.
+
+        //    EnsureAttributesAreBound();
+
+        //    if (_lazyInternalsVisibleToMap == null)
+        //        return SpecializedCollections.EmptyEnumerable<ImmutableArray<byte>>();
+
+        //    ConcurrentDictionary<ImmutableArray<byte>, Tuple<Location, string>> result = null;
+
+        //    _lazyInternalsVisibleToMap.TryGetValue(simpleName, out result);
+
+        //    return (result != null) ? result.Keys : SpecializedCollections.EmptyEnumerable<ImmutableArray<byte>>();
+        //}
 
         internal override IEnumerable<string> GetInternalsVisibleToAssemblyNames()
         {

@@ -4207,3 +4207,8 @@ virtual Microsoft.CodeAnalysis.Text.SourceText.Write(System.IO.TextWriter! write
 virtual Microsoft.CodeAnalysis.Text.TextLineCollection.GetLineFromPosition(int position) -> Microsoft.CodeAnalysis.Text.TextLine
 virtual Microsoft.CodeAnalysis.Text.TextLineCollection.GetLinePosition(int position) -> Microsoft.CodeAnalysis.Text.LinePosition
 virtual Microsoft.CodeAnalysis.XmlFileResolver.FileExists(string? resolvedPath) -> bool
+RoslynMod.TestInternal
+static RoslynMod.TestInternal.IsInternalsVisible(string thisName, string toName) -> System.Collections.Generic.IEnumerable<System.Collections.Immutable.ImmutableArray<byte>>
+static RoslynMod.TestInternal.AppendInternalsVisible(string thisName, System.Collections.Generic.HashSet<string> toNames) -> void
+RoslynMod.Print
+static RoslynMod.Print.it(object o) -> void

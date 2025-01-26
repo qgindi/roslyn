@@ -20,6 +20,8 @@ internal abstract partial class AbstractSignatureHelpProvider
         IEnumerable<SignatureHelpParameter> parameters,
         IEnumerable<TaggedText>? descriptionParts) : SignatureHelpItem(isVariadic, documentationFactory, prefixParts, separatorParts, suffixParts, parameters, descriptionParts), IEquatable<SymbolKeySignatureHelpItem>
     {
+        internal ISymbol? Symbol { get; } = symbol; //au
+
         public SymbolKey? SymbolKey { get; } = symbol?.GetSymbolKey();
 
         public override bool Equals(object? obj)
