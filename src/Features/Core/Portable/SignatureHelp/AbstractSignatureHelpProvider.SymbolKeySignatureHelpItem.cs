@@ -43,5 +43,7 @@ internal abstract partial class AbstractSignatureHelpProvider
             var comparer = CodeAnalysis.SymbolKey.GetComparer(ignoreCase: false, ignoreAssemblyKeys: false);
             return comparer.GetHashCode(SymbolKey.Value);
         }
+
+        internal ISymbol? Symbol { get; } = symbol; //au
     }
 }
