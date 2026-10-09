@@ -76,6 +76,8 @@ internal static class SymbolCompletionItem
             tags: tags,
             isComplexTextEdit: isComplexTextEdit);
 
+        item.Symbols = symbols; //au
+
         return item;
     }
 
